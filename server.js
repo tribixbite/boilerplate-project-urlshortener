@@ -25,6 +25,15 @@ app.get('/api/hello', function(req, res) {
   res.json({ greeting: 'hello API' });
 });
 
+app.get('/api/shorturl/:urlNum', function(req, res) {
+  let urlNum = req.body.urlNum;
+  if (urlNum <= savedURLS.length){
+    res.redirect(savedURLS[urlNum]);
+    return;
+  }
+  res.json({error: 'url not saved'});
+});
+
 app.post('/api/shorturl/new', function(req, res) {
   console.log(req.body.url);
   let host = req.body.url;
@@ -41,7 +50,10 @@ app.post('/api/shorturl/new', function(req, res) {
 
     if (address == undefined) {
       res.json({error: 'invalid url'});
+      return;
     }
+    res.json({ original_url : req.body.url, short_url : savedURLS.length});
+    savedURLS.append(req.body.url);
     //do some stuff
     });
   //res.json({ greeting: 'hello API' });
