@@ -7,7 +7,7 @@ const dns = require('dns');
 //dns.lookup(url, cb);
 // dns.lookup("techneesssh.com", function(err, address){console.log(address == undefined)}) true if invalid
 
-var savedURLS = {};
+var savedURLS = [];
 
 // Basic Configuration
 const port = process.env.PORT || 3000;
@@ -53,7 +53,7 @@ app.post('/api/shorturl/new', function(req, res) {
       return;
     }
     res.json({ original_url : req.body.url, short_url : savedURLS.length});
-    savedURLS.append(req.body.url);
+    savedURLS.push(req.body.url);
     //do some stuff
     });
   //res.json({ greeting: 'hello API' });
