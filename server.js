@@ -27,7 +27,7 @@ app.get('/api/hello', function(req, res) {
 
 app.get('/api/shorturl/:urlNum', function(req, res) {
   let urlNum = req.params.urlNum;
-
+  console.log(urlNum);
   console.log("got to shortcut");
   console.log(`redirecting to: ${savedURLS[urlNum]}`)
 
